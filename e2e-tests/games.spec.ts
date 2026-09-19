@@ -24,6 +24,46 @@ test.describe('Game Listing and Navigation', () => {
     });
   });
 
+  test('should filter games by category', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByTestId('game-filters')).toBeVisible();
+
+    await page.getByRole('checkbox', { name: 'Strategy' }).check();
+    await page.getByTestId('apply-filters').click();
+
+    await expect(page).toHaveURL(/category=\d+/);
+    await expect(page.getByRole('checkbox', { name: 'Strategy' })).toBeChecked();
+    const visibleCards = page.locator('[data-testid="game-card"]:visible');
+    await expect(visibleCards.filter({ hasText: 'DevOps Dominion' })).toHaveCount(1);
+    await expect(visibleCards.filter({ hasText: 'Code Puzzle Chronicles' })).toHaveCount(0);
+  });
+
+  test('should filter games by publisher', async ({ page }) => {
+    await page.goto('/');
+    await page.getByTestId('publisher-filter').selectOption({ label: 'CodeForge Studios' });
+    await page.getByTestId('apply-filters').click();
+
+    await expect(page).toHaveURL(/publisher=\d+/);
+    await expect(page.getByTestId('publisher-filter')).not.toHaveValue('');
+    const visibleCards = page.locator('[data-testid="game-card"]:visible');
+    await expect(visibleCards.filter({ hasText: 'DevOps Dominion' })).toHaveCount(1);
+    await expect(visibleCards.filter({ hasText: 'Pipeline Conquest' })).toHaveCount(0);
+  });
+
+  test('should combine category and publisher filters', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('checkbox', { name: 'Strategy' }).check();
+    await page.getByTestId('publisher-filter').selectOption({ label: 'CodeForge Studios' });
+    await page.getByTestId('apply-filters').click();
+
+    await expect(page).toHaveURL(/category=\d+&publisher=\d+/);
+    await expect(page.getByRole('checkbox', { name: 'Strategy' })).toBeChecked();
+    await expect(page.getByTestId('publisher-filter')).not.toHaveValue('');
+    const visibleCards = page.locator('[data-testid="game-card"]:visible');
+    await expect(visibleCards.filter({ hasText: 'DevOps Dominion' })).toHaveCount(1);
+    await expect(visibleCards.filter({ hasText: 'Code Puzzle Chronicles' })).toHaveCount(0);
+  });
+
   test('should navigate to correct game details page when clicking on a game', async ({ page }) => {
     let gameId: string | null;
     let gameTitle: string | null;
