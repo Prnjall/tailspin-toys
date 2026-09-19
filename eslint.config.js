@@ -40,4 +40,11 @@ export default [
       parser: tseslint.parser,
     },
   },
+  {
+    files: ["db/**/*.ts", "src/lib/**/*.ts"],
+    rules: {
+      // Data-layer exports are public build-time contracts used by pages and tests.
+      "@typescript-eslint/explicit-module-boundary-types": "error",
+    },
+  },
 ];

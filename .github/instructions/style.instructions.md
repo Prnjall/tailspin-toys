@@ -40,6 +40,13 @@ ALL UI components MUST use dark theme colors:
 - Mobile-first approach
 - Ensure readability on all screen sizes
 
+## TypeScript and Comments
+
+- In Astro frontmatter and scripts, use four-space indentation, single-quoted strings, semicolons, and trailing commas in multiline literals.
+- Add explicit parameter and return types to functions, especially when data crosses a component or data-layer boundary.
+- Comment intent, accessibility decisions, or non-obvious constraints; never add comments that merely restate a utility class or markup.
+- Keep component `Props` documentation next to the interface and update it whenever the contract changes.
+
 ## Utility Classes
 
 - Prefer utility classes over custom CSS when possible

@@ -20,6 +20,13 @@ Refer to technology-specific instruction files:
 
 ## Core Principles
 
+### Comments and Documentation
+
+- Comments must explain **why**: intent, a product or accessibility decision, a constraint, or a non-obvious trade-off.
+- Do not restate what the HTML, Astro expression, or Tailwind class already communicates.
+- Document reusable component APIs in the `Props` interface with TSDoc/JSDoc, including prop purpose, optionality, and meaningful constraints.
+- Keep documentation current with the implementation. Update or remove comments when the behavior they describe changes.
+
 ### Testability
 
 - Every interactive element MUST include a `data-testid` attribute
@@ -49,7 +56,7 @@ Refer to technology-specific instruction files:
 - Create reusable components for common UI patterns
 - Keep components focused on a single responsibility
 - Use props for configuration, not duplication
-- Document component APIs with TypeScript types
+- Document component APIs with typed `Props` interfaces and TSDoc/JSDoc comments
 
 ## Development Workflow
 

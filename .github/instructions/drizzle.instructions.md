@@ -51,6 +51,12 @@ export async function getAllGameIds(db: Database): Promise<number[]> {
 }
 ```
 
+- Every exported function in `db/` and `src/lib/` must have a TSDoc/JSDoc block.
+- Document the function's purpose, every parameter (including the injectable `db`), and its return value. Explain important ordering, nullability, determinism, or side-effect guarantees when they are part of the contract.
+- Keep comments focused on intent and public contracts. Do not add comments that simply narrate a readable query, assignment, or control-flow statement.
+- Update or remove a comment when the related implementation changes; stale documentation is a correctness bug.
+- Use explicit parameter and return types for exported and internal functions. The scoped ESLint configuration enforces explicit module-boundary types for the data layer.
+
 - Always `order by` a stable column (title) so static builds are deterministic.
 - Map raw rows to the app-facing `Game`/`Publisher`/`Category` types in one place; don't leak Drizzle row shapes into components.
 - Keep ordering/lookup logic in `games.ts`, not in pages.
