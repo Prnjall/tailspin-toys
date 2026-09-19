@@ -123,6 +123,16 @@ start Astro. When Astro reports its local URL, the app opens it in the browser
 canvas automatically. The menu also provides static build and type-check
 commands for on-demand validation.
 
+## Coding standards
+
+Repository-wide guidance is maintained in
+[`.github/instructions/`](.github/instructions/) and is applied by file type.
+The standards require intent-first comments (explain **why**, not **what**),
+TSDoc/JSDoc for exported data-layer functions and reusable Astro component
+`Props` interfaces, and consistent TypeScript formatting. ESLint enforces
+explicit module-boundary types for `db/` and `src/lib/`; run `npm run lint` to
+check the implementation alongside the applicable instruction file.
+
 ## License 
 
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) for the full terms.
